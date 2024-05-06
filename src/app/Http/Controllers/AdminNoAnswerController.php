@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 
 
-class AdminController extends Controller
+class AdminNoAnswerController extends Controller
 {
     public function list()
     {
         $questions = Question::whereNull('answerId')
                      ->orWhere('answerId', '')
                      ->get();
-        return view('adminpanel')
+        return view('adminNoAnswer')
             ->with('questions', $questions);
     }
 }

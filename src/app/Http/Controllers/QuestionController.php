@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Question;
 
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -28,14 +23,6 @@ class QuestionController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreQuestionRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Question $question)
     {
         //
     }
@@ -59,8 +46,16 @@ class QuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Question $question)
+    public function destroy(Request $request, $id, $route)
     {
-        //
+        $question = Question::findOrFail($id);
+
+        $answer = $question->answer;
+        if ($answer) {
+            $answer->delete();
+        }
+        $question->delete();
+
+        return redirect()->route($route);
     }
 }
