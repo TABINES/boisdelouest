@@ -14,7 +14,7 @@ class Answer extends Model
     *
     * @var bool
     */
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function user()
     {

@@ -13,14 +13,16 @@
         <div class="divide-y divide-gray-300/50">
             <div class="pb-3 text-gray-900">
                 <div>{{ $question->content }}</div><br>
-                <div>Par {{ $question->user->firstname }} {{ $question->user->lastname }}</div>
             </div>
             <div class="text-center space-x-100">
-                <form method="POST" action="{{ route('question.delete', ['id' => $question->id, 'route' => 'admin.answered']) }}">
+                <form method="POST" action="{{ route('admin.noanswer.create', ['id' => $question]) }}">
                     @csrf
                     <button type="submit" class="text-14532d m-2 mr-10">
                         Répondre
                     </button>
+                </form>
+                <form method="POST" action="{{ route('admin.noanswer.delete', ['id' => $question->id, 'route' => 'admin.noanswer']) }}">
+                    @csrf
                     <button type="submit" class="text-14532d m-2 mr-10">
                         Supprimer
                     </button>

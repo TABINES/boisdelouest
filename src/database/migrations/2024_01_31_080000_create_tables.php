@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('profile');
             $table->string('password');
+            $table->string('role')->nullable();
         });
 
         Schema::create('answers', function (Blueprint $table) {
@@ -25,15 +26,15 @@ return new class extends Migration
             $table->unsignedBigInteger('userId');
             $table->foreign('userId')->references('id')->on('users');
             $table->text('content');
+            $table->timestamps();
         });
 
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('userId')->nullable();
-            $table->foreign('userId')->references('id')->on('users');
             $table->unsignedBigInteger('answerId')->nullable();
             $table->foreign('answerId')->references('id')->on('answers')->onDelete('set null');
             $table->text('content');
+            $table->timestamps();
         });
     }
 

@@ -17,9 +17,9 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-
         $firstname = $this->faker->firstName;
         $lastname = $this->faker->lastName;
+        $randomNumber = random_int(0, 1);
 
         return [
             'firstname' => $firstname,
@@ -27,6 +27,7 @@ class UserFactory extends Factory
             'profile' => $this->faker->imageUrl(40, 40, $firstname, false, '', true, 'png'),
             'email' => $this->faker->unique()->safeEmail,
             'password' => Hash::make('password'),
+            'role' => $randomNumber === 0 ? null : 'gestionnaire',
         ];
     }
 }
